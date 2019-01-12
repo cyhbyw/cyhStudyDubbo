@@ -16,13 +16,13 @@ public class ConsumerApplication {
         context.start();
 
         DemoService demoService = (DemoService) context.getBean("demoService");
-        System.out.println("demoService.getClass().getName(): " + demoService.getClass().getName());
+        System.err.println("demoService.getClass().getName(): " + demoService.getClass().getName());
 
         String hello = demoService.sayHello("CYH");
-        System.out.println(hello);
+        System.err.println(hello);
 
         User user = demoService.findUserById(15);
-        System.out.println(user);
+        System.err.println(user);
 
     }
 }
