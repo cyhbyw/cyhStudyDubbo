@@ -7,14 +7,14 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 /**
  * Dubbo provider
  */
-public class App {
+public class ProviderApplication {
 
     public static void main(String[] args) {
 
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("dubbo-provider.xml");
         context.start();
 
-        System.out.println("Dubbo provider start...");
+        System.out.println("Dubbo provider started...");
 
         try {
             System.in.read(); // 按任意键退出

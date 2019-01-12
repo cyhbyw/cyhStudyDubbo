@@ -32,6 +32,11 @@
             <version>${dubbo.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.github.sgroschupf</groupId>
+            <artifactId>zkclient</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
             <groupId>com.cyh</groupId>
             <artifactId>SecondDubboCommon</artifactId>
             <version>1.0-SNAPSHOT</version>

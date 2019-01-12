@@ -8,7 +8,7 @@ import com.ricky.dubbo.api.model.User;
 /**
  * Dubbo Consumer client
  */
-public class App {
+public class ConsumerApplication {
 
     public static void main(String[] args) {
 

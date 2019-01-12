@@ -9,11 +9,13 @@ public class DemoServiceImpl implements DemoService {
 
     @Override
     public String sayHello(String name) {
+        System.err.println("Invoking sayHello(). name=" + name);
         return "Hello " + name + "! now is " + new Date();
     }
 
     @Override
     public User findUserById(long id) {
+        System.err.println("Invoking findUserById(). id=" + id);
         User user = new User();
         user.setId(id);
         user.setName("CYH");
