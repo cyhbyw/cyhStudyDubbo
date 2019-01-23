@@ -1,0 +1,6 @@
+
+
+
+Dubbo official example: http://dubbo.apache.org/zh-cn/docs/source_code_guide/adaptive-extension.html
+
+
