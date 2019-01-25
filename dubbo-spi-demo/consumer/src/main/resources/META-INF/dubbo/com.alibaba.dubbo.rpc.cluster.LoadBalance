@@ -1,0 +1,1 @@
+demoLoadBalance = com.dubbo.spi.demo.consumer.DemoLoadBalance
