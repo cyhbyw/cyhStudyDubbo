@@ -1,0 +1,33 @@
+服务端和客户端都依赖了api包及utils包，客户端通过api中的接口来调用服务端
+服务端在执行过程中抛出了utils包中定义的非检查异常
+此时，客户端是不能（不能、不能）捕获到此异常的！！！！
+原因如文章中所述  https://mp.weixin.qq.com/s/Sa_lWU9x9pxXO6q1NqECBA
+
+
+源码参见 ExceptionFilter
+
+
+源码中的判断逻辑如下：
+1. 如果是checked异常，直接抛出. 很明显,我们的HelloException是RuntimeException,不符合
+2. 在方法签名上有声明，直接抛出. 很明显,我们接口并未声明该异常,不符合
+3. 异常类和接口类在同一jar包里，直接抛出. 很明显,我们的异常类是在common.jar的,接口是在api.jar的,不符合
+4. 是JDK自带的异常，直接抛出. 很明显,这个HelloException是我们自定义的,不符合
+5. 是Dubbo本身的异常(RpcException)，直接抛出. 很明显,这个HelloException是我们自定义的,和RpcException几乎没有半毛钱关系.
+6. 否则，包装成RuntimeException抛给客户端. 因为以上5点均不满足,所以该异常会被包装成RuntimeException异常抛出(重要)
+
+
+那，Dubbo为什么要这样设计呢，原因在于，如果直接抛出此异常客户端可能无法反序列化，具体如下：
+1. checked异常和RuntimeException是不同类型,强行包装可能会出现类型转换错误,因此不包,直接抛出
+2. 方法签名上有声明.
+     如果这个异常是provider.jar中定义的,因为consumer是依赖api.jar而不是依赖provider.jar那么编译都编译不过,
+     如果能编译得过,说明consumer是能依赖到这个异常的,因此反序列化不会有问题,直接抛出
+3. 异常类和接口类在同一个jar包里.
+     provider和consumer都依赖api,如果异常在这个api,那么反序列化也不会有问题,直接抛出
+4. 是JDK自带的异常，直接抛出.
+     provider和consumer都依赖jdk,序列化也不会有问题,直接抛出
+5. 是Dubbo本身的异常(RpcException)，直接抛出.
+     provider和consumer都依赖Dubbo,序列化也不会有问题,直接抛出
+6. 否则，包装成RuntimeException抛给客户端.
+     此时,就有可能出现我说的那种,这个异常是provider.jar自定义的,那么provider抛出的时候进行序列化,
+     因为consumer没有依赖provider.jar,所以异常到达consumer时,根本无法反序列化.
+     但是包装成了RuntimeException异常则不同,此时异常就是JDK中的类了,到哪都能序列化.
