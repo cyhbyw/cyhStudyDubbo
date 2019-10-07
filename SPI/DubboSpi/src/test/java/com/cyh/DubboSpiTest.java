@@ -1,8 +1,7 @@
 package com.cyh;
 
+import org.apache.dubbo.common.extension.ExtensionLoader;
 import org.junit.Test;
-
-import com.alibaba.dubbo.common.extension.ExtensionLoader;
 
 /**
  * @author: CYH

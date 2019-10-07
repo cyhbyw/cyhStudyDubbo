@@ -1,8 +1,8 @@
 package com.cyh.wheel;
 
+import org.apache.dubbo.common.extension.ExtensionLoader;
 
 import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.common.extension.ExtensionLoader;
 
 /**
  * @author: CYH
