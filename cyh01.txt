@@ -1,5 +1,8 @@
 
 ---- From http://dubbo.apache.org/zh-cn/docs/source_code_guide/service-invoking-process.html ----
+
+
+tag01:
 经历多次调用，到这里请求数据的发送过程就结束了，过程漫长。
 为了便于大家阅读代码，这里以 DemoService 为例，将 sayHello 方法的整个调用路径贴出来。
 
@@ -19,3 +22,19 @@ proxy0#sayHello(String)
                           —> AbstractClient#send(Object, boolean)
                             —> NettyChannel#send(Object, boolean)
                               —> NioClientSocketChannel#write(Object)
+
+
+
+tag02:
+解码器将数据包解析成 Request 对象后，NettyHandler 的 messageReceived 方法紧接着会收到这个对象，并将这个对象继续向下传递。
+这期间该对象会被依次传递给 NettyServer、MultiMessageHandler、HeartbeatHandler 以及 AllChannelHandler。
+最后由 AllChannelHandler 将该对象封装到 Runnable 实现类对象中，并将 Runnable 放入线程池中执行后续的调用逻辑。
+整个调用栈如下：
+
+NettyHandler#messageReceived(ChannelHandlerContext, MessageEvent)
+  —> AbstractPeer#received(Channel, Object)
+    —> MultiMessageHandler#received(Channel, Object)
+      —> HeartbeatHandler#received(Channel, Object)
+        —> AllChannelHandler#received(Channel, Object)
+          —> ExecutorService#execute(Runnable)    // 由线程池执行后续的调用逻辑
+
