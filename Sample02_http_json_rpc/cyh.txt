@@ -1,0 +1,5 @@
+https://github.com/apache/dubbo-rpc-jsonrpc
+
+运行此模块代码前，需要先在本地通过Maven安装：dubbo-rpc-jsonrpc
+
+
