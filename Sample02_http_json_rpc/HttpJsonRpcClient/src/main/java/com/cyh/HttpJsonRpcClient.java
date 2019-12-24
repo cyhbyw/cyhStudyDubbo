@@ -21,6 +21,8 @@ public class HttpJsonRpcClient {
         JSONObject param = new JSONObject();
         param.put("jsonrpc", "2.0");
         param.put("method", "sayHello");
+        // 加上 id 底层的 jsonrpc4j 才会写回结果，否则结果为空（通过调试源码发现的）
+        param.put("id", 1);
         List<String> list = new ArrayList<>();
         list.add("cyh");
         param.put("params", list);
