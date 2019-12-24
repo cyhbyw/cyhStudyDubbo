@@ -2,4 +2,7 @@ https://github.com/apache/dubbo-rpc-jsonrpc
 
 运行此模块代码前，需要先在本地通过Maven安装：dubbo-rpc-jsonrpc
 
+可通过 postman 发起请求
+也可通过代码直接调用
+// 但是，Provider明明有返回值，为什么不管是Postman还是Client代码，均没有返回值呢？
 
