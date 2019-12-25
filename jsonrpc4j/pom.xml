@@ -362,7 +362,7 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-server</artifactId>
-            <version>9.0.0.RC0</version>
+            <version>9.4.11.v20180605</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -374,7 +374,7 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-servlet</artifactId>
-            <version>9.0.0.RC0</version>
+            <version>9.4.11.v20180605</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -386,7 +386,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>1.0.0.RELEASE</version>
+            <version>1.5.9.RELEASE</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
