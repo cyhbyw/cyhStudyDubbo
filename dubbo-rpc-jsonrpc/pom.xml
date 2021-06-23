@@ -42,7 +42,7 @@
     <properties>
         <dubbo_version>2.7.1</dubbo_version>
         <jsonrpc_version>1.2.0</jsonrpc_version>
-        <jetty_version>9.4.11.v20180605</jetty_version>
+        <jetty_version>9.4.41.v20210516</jetty_version>
         <mortbay_jetty_version>6.1.26</mortbay_jetty_version>
         <jackson.version>2.10.0</jackson.version>
         <maven.compiler.source>1.8</maven.compiler.source>
